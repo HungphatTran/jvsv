@@ -35,6 +35,7 @@ public class QuanLyCF extends javax.swing.JFrame {
         pnBxiu = new javax.swing.JPanel();
         btnXemchitietBacXiu1 = new javax.swing.JButton();
         lbBxiu1 = new javax.swing.JLabel();
+        textBxiu = new javax.swing.JLabel();
         pnMatchaLatte = new javax.swing.JPanel();
         btnXemchitietBacXiu2 = new javax.swing.JButton();
         lbBxiu2 = new javax.swing.JLabel();
@@ -51,13 +52,12 @@ public class QuanLyCF extends javax.swing.JFrame {
         btnXemchitietBacXiu6 = new javax.swing.JButton();
         lbBxiu6 = new javax.swing.JLabel();
         textCaPheNau = new javax.swing.JLabel();
-        textBxiu = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         lbQLCF.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
         lbQLCF.setForeground(new java.awt.Color(255, 51, 153));
-        lbQLCF.setText("Quản lý cà phê");
+        lbQLCF.setText("Quản lý Cà Phê");
 
         lbMenu.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         lbMenu.setForeground(new java.awt.Color(255, 0, 204));
@@ -80,29 +80,26 @@ public class QuanLyCF extends javax.swing.JFrame {
         pnCFMuoi.setLayout(pnCFMuoiLayout);
         pnCFMuoiLayout.setHorizontalGroup(
             pnCFMuoiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnCFMuoiLayout.createSequentialGroup()
-                .addGroup(pnCFMuoiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pnCFMuoiLayout.createSequentialGroup()
-                        .addGap(102, 102, 102)
-                        .addComponent(textCaPheMuoi))
-                    .addGroup(pnCFMuoiLayout.createSequentialGroup()
-                        .addGap(92, 92, 92)
-                        .addComponent(btnXemchitietBacXiu)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnCFMuoiLayout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(lbBxiu, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(60, 60, 60))
+                .addContainerGap(18, Short.MAX_VALUE)
+                .addGroup(pnCFMuoiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(lbBxiu)
+                    .addComponent(btnXemchitietBacXiu)
+                    .addGroup(pnCFMuoiLayout.createSequentialGroup()
+                        .addComponent(textCaPheMuoi)
+                        .addGap(18, 18, 18)))
+                .addGap(24, 24, 24))
         );
         pnCFMuoiLayout.setVerticalGroup(
             pnCFMuoiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnCFMuoiLayout.createSequentialGroup()
-                .addComponent(lbBxiu, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(3, 3, 3)
+                .addGap(24, 24, 24)
+                .addComponent(lbBxiu)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(textCaPheMuoi)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnXemchitietBacXiu)
-                .addContainerGap(11, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pnBxiu.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -116,25 +113,35 @@ public class QuanLyCF extends javax.swing.JFrame {
 
         lbBxiu1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/bac-xiu-da.png"))); // NOI18N
 
+        textBxiu.setText("Bạc xỉu");
+
         javax.swing.GroupLayout pnBxiuLayout = new javax.swing.GroupLayout(pnBxiu);
         pnBxiu.setLayout(pnBxiuLayout);
         pnBxiuLayout.setHorizontalGroup(
             pnBxiuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnBxiuLayout.createSequentialGroup()
-                .addGap(63, 63, 63)
-                .addGroup(pnBxiuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(lbBxiu1)
-                    .addComponent(btnXemchitietBacXiu1))
-                .addContainerGap(71, Short.MAX_VALUE))
+                .addGroup(pnBxiuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnBxiuLayout.createSequentialGroup()
+                        .addGap(52, 52, 52)
+                        .addComponent(textBxiu))
+                    .addGroup(pnBxiuLayout.createSequentialGroup()
+                        .addGap(25, 25, 25)
+                        .addComponent(btnXemchitietBacXiu1))
+                    .addGroup(pnBxiuLayout.createSequentialGroup()
+                        .addGap(15, 15, 15)
+                        .addComponent(lbBxiu1)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         pnBxiuLayout.setVerticalGroup(
             pnBxiuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnBxiuLayout.createSequentialGroup()
-                .addGap(22, 22, 22)
-                .addComponent(lbBxiu1, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(12, 12, 12)
+                .addComponent(lbBxiu1, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(textBxiu)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnXemchitietBacXiu1)
-                .addContainerGap(15, Short.MAX_VALUE))
+                .addContainerGap(17, Short.MAX_VALUE))
         );
 
         pnMatchaLatte.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -154,13 +161,13 @@ public class QuanLyCF extends javax.swing.JFrame {
         pnMatchaLatte.setLayout(pnMatchaLatteLayout);
         pnMatchaLatteLayout.setHorizontalGroup(
             pnMatchaLatteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnMatchaLatteLayout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
+            .addGroup(pnMatchaLatteLayout.createSequentialGroup()
+                .addGap(27, 27, 27)
                 .addComponent(textMatchaLatte)
-                .addGap(101, 101, 101))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnMatchaLatteLayout.createSequentialGroup()
-                .addContainerGap(68, Short.MAX_VALUE)
-                .addGroup(pnMatchaLatteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(pnMatchaLatteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(btnXemchitietBacXiu2)
                     .addComponent(lbBxiu2, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(69, 69, 69))
@@ -168,13 +175,13 @@ public class QuanLyCF extends javax.swing.JFrame {
         pnMatchaLatteLayout.setVerticalGroup(
             pnMatchaLatteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnMatchaLatteLayout.createSequentialGroup()
-                .addGap(32, 32, 32)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(lbBxiu2, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(textMatchaLatte)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnXemchitietBacXiu2)
-                .addContainerGap(28, Short.MAX_VALUE))
+                .addGap(12, 12, 12))
         );
 
         pnXoaiChanhLeo.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -194,27 +201,28 @@ public class QuanLyCF extends javax.swing.JFrame {
         pnXoaiChanhLeo.setLayout(pnXoaiChanhLeoLayout);
         pnXoaiChanhLeoLayout.setHorizontalGroup(
             pnXoaiChanhLeoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnXoaiChanhLeoLayout.createSequentialGroup()
-                .addGap(0, 56, Short.MAX_VALUE)
-                .addComponent(lbBxiu3)
-                .addGap(77, 77, 77))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnXoaiChanhLeoLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(pnXoaiChanhLeoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(textXoaiChanhLeo)
-                    .addComponent(btnXemchitietBacXiu3))
-                .addGap(103, 103, 103))
+            .addGroup(pnXoaiChanhLeoLayout.createSequentialGroup()
+                .addGroup(pnXoaiChanhLeoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnXoaiChanhLeoLayout.createSequentialGroup()
+                        .addGap(28, 28, 28)
+                        .addGroup(pnXoaiChanhLeoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnXemchitietBacXiu3)
+                            .addComponent(textXoaiChanhLeo)))
+                    .addGroup(pnXoaiChanhLeoLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(lbBxiu3, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(16, Short.MAX_VALUE))
         );
         pnXoaiChanhLeoLayout.setVerticalGroup(
             pnXoaiChanhLeoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnXoaiChanhLeoLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(lbBxiu3, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lbBxiu3, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(textXoaiChanhLeo)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(12, 12, 12)
                 .addComponent(btnXemchitietBacXiu3)
-                .addContainerGap(48, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         pnMatchaDaXay.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -234,27 +242,24 @@ public class QuanLyCF extends javax.swing.JFrame {
         pnMatchaDaXay.setLayout(pnMatchaDaXayLayout);
         pnMatchaDaXayLayout.setHorizontalGroup(
             pnMatchaDaXayLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnMatchaDaXayLayout.createSequentialGroup()
-                .addContainerGap(80, Short.MAX_VALUE)
-                .addGroup(pnMatchaDaXayLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lbBxiu4)
-                    .addComponent(btnXemchitietBacXiu4))
-                .addGap(88, 88, 88))
             .addGroup(pnMatchaDaXayLayout.createSequentialGroup()
-                .addGap(88, 88, 88)
-                .addComponent(textMatcha_daxay)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(28, 28, 28)
+                .addGroup(pnMatchaDaXayLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnXemchitietBacXiu4)
+                    .addGroup(pnMatchaDaXayLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(lbBxiu4, javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(textMatcha_daxay, javax.swing.GroupLayout.Alignment.TRAILING)))
+                .addContainerGap(13, Short.MAX_VALUE))
         );
         pnMatchaDaXayLayout.setVerticalGroup(
             pnMatchaDaXayLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnMatchaDaXayLayout.createSequentialGroup()
-                .addGap(20, 20, 20)
                 .addComponent(lbBxiu4, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(22, 22, 22)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(textMatcha_daxay)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addComponent(btnXemchitietBacXiu4)
-                .addContainerGap(31, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pnCFNau.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -275,97 +280,74 @@ public class QuanLyCF extends javax.swing.JFrame {
         pnCFNauLayout.setHorizontalGroup(
             pnCFNauLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnCFNauLayout.createSequentialGroup()
-                .addContainerGap(46, Short.MAX_VALUE)
-                .addGroup(pnCFNauLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnXemchitietBacXiu6, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(pnCFNauLayout.createSequentialGroup()
-                        .addGap(67, 67, 67)
-                        .addComponent(textCaPheNau))
-                    .addGroup(pnCFNauLayout.createSequentialGroup()
-                        .addGap(32, 32, 32)
-                        .addComponent(lbBxiu6, javax.swing.GroupLayout.DEFAULT_SIZE, 183, Short.MAX_VALUE))))
+                .addGap(18, 18, 18)
+                .addComponent(lbBxiu6)
+                .addGap(0, 17, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnCFNauLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(textCaPheNau)
+                .addGap(39, 39, 39))
+            .addGroup(pnCFNauLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(btnXemchitietBacXiu6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         pnCFNauLayout.setVerticalGroup(
             pnCFNauLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnCFNauLayout.createSequentialGroup()
                 .addGap(20, 20, 20)
-                .addComponent(lbBxiu6, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(13, 13, 13)
+                .addComponent(lbBxiu6)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(textCaPheNau)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnXemchitietBacXiu6)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        textBxiu.setText("Bạc xỉu");
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(lbQLCF)
-                        .addGap(549, 549, 549))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(lbMenu)
-                        .addGap(634, 634, 634))))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(250, 250, 250)
-                        .addComponent(textBxiu))
+                        .addGap(26, 26, 26)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(pnMatchaLatte, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                            .addComponent(pnBxiu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(53, 53, 53)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(pnCFNau, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(pnMatchaDaXay, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(40, 40, 40)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(pnCFMuoi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(pnXoaiChanhLeo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(144, 144, 144)
-                        .addComponent(pnMatchaLatte, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 134, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(pnMatchaDaXay, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(121, 121, 121))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(pnCFNau, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(111, 111, 111)))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(pnCFMuoi, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(pnXoaiChanhLeo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(210, 210, 210))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(139, 139, 139)
-                    .addComponent(pnBxiu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(1025, Short.MAX_VALUE)))
+                        .addGap(259, 259, 259)
+                        .addComponent(lbMenu))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(172, 172, 172)
+                        .addComponent(lbQLCF)))
+                .addContainerGap(49, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(45, 45, 45)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addComponent(lbQLCF)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lbMenu)
-                .addGap(101, 101, 101)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(pnCFMuoi, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(212, 212, 212)
-                        .addComponent(textBxiu))
-                    .addComponent(pnCFNau, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(52, 52, 52)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(pnMatchaDaXay, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(pnMatchaLatte, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(pnXoaiChanhLeo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(4, 4, 4)))
-                .addContainerGap(815, Short.MAX_VALUE))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(239, 239, 239)
-                    .addComponent(pnBxiu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(1176, Short.MAX_VALUE)))
+                    .addComponent(pnCFNau, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(pnBxiu, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(40, 40, 40)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(pnMatchaDaXay, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(pnMatchaLatte, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(pnXoaiChanhLeo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -436,15 +418,12 @@ public class QuanLyCF extends javax.swing.JFrame {
     private javax.swing.JButton btnXemchitietBacXiu2;
     private javax.swing.JButton btnXemchitietBacXiu3;
     private javax.swing.JButton btnXemchitietBacXiu4;
-    private javax.swing.JButton btnXemchitietBacXiu5;
     private javax.swing.JButton btnXemchitietBacXiu6;
-    private javax.swing.JPanel jPanel6;
     private javax.swing.JLabel lbBxiu;
     private javax.swing.JLabel lbBxiu1;
     private javax.swing.JLabel lbBxiu2;
     private javax.swing.JLabel lbBxiu3;
     private javax.swing.JLabel lbBxiu4;
-    private javax.swing.JLabel lbBxiu5;
     private javax.swing.JLabel lbBxiu6;
     private javax.swing.JLabel lbMenu;
     private javax.swing.JLabel lbQLCF;
