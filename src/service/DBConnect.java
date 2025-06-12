@@ -10,7 +10,7 @@ import java.sql.SQLException;
 public class DBConnect {
     public static final String HOSTNAME = "localhost";
     public static final String PORT = "1433";
-    public static final String DBNAME = "SOF2043_DEMO";
+    public static final String DBNAME = "CAPHE";
     public static final String USERNAME = "sa";
     public static final String PASSWORD = "123456789";
 
@@ -39,7 +39,7 @@ public class DBConnect {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        System.out.println("Kết nối thành công: "+getConnection());
+        System.out.println(getConnection());
     }
 
     public DBConnect() {
