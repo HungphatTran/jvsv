@@ -4,6 +4,14 @@
  */
 package view;
 
+import java.awt.BorderLayout;
+import java.awt.Font;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author tranh
@@ -13,8 +21,34 @@ public class QuanLyCF extends javax.swing.JFrame {
     /**
      * Creates new form QuanLyCF
      */
+    
+     private DefaultTableModel model;
+     
     public QuanLyCF() {
         initComponents();
+        
+        
+        setTitle("Trang Menu Chính");
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE); // Đóng Frame này khi nhấn X
+
+        JPanel panel = new JPanel();
+        JLabel label = new JLabel("<html><center>Chào mừng đến với<br>Trang Quản lý Menu</center></html>");
+        label.setFont(new Font("Segoe UI", Font.BOLD, 24));
+        panel.add(label);
+        add(panel, BorderLayout.CENTER);
+
+        // Nút "Quay lại" (tùy chọn)
+        JButton btnQuayLai = new JButton("Quay lại Trang Chính");
+        btnQuayLai.addActionListener(e -> {
+            this.dispose(); // Đóng MenuFrame hiện tại
+            new QuanLyCF().setVisible(true); // Tạo và hiển thị lại QuanLyCF
+        });
+        JPanel southPanel = new JPanel();
+        southPanel.add(btnQuayLai);
+        add(southPanel, BorderLayout.SOUTH);
+
+        setLocationRelativeTo(null);
+        
     }
 
     /**
@@ -52,6 +86,9 @@ public class QuanLyCF extends javax.swing.JFrame {
         btnXemchitietBacXiu6 = new javax.swing.JButton();
         lbBxiu6 = new javax.swing.JLabel();
         textCaPheNau = new javax.swing.JLabel();
+        btnQLKH = new javax.swing.JButton();
+        btnQLNL = new javax.swing.JButton();
+        btnMenu = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -304,6 +341,17 @@ public class QuanLyCF extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        btnQLKH.setText("QLKH");
+
+        btnQLNL.setText("QL Nguyên Liệu");
+
+        btnMenu.setText("MENU");
+        btnMenu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMenuActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -321,15 +369,21 @@ public class QuanLyCF extends javax.swing.JFrame {
                             .addComponent(pnMatchaDaXay, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(40, 40, 40)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(pnCFMuoi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(pnXoaiChanhLeo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(pnXoaiChanhLeo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(pnCFMuoi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 98, Short.MAX_VALUE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(btnQLNL, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(btnQLKH, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(btnMenu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(259, 259, 259)
                         .addComponent(lbMenu))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(172, 172, 172)
                         .addComponent(lbQLCF)))
-                .addContainerGap(49, Short.MAX_VALUE))
+                .addGap(42, 42, 42))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -337,11 +391,20 @@ public class QuanLyCF extends javax.swing.JFrame {
                 .addComponent(lbQLCF)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lbMenu)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(pnCFMuoi, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(pnCFNau, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(pnBxiu, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(pnCFMuoi, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(pnCFNau, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(pnBxiu, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(79, 79, 79)
+                        .addComponent(btnMenu)
+                        .addGap(38, 38, 38)
+                        .addComponent(btnQLKH)
+                        .addGap(42, 42, 42)
+                        .addComponent(btnQLNL)))
                 .addGap(40, 40, 40)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(pnMatchaDaXay, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -376,6 +439,11 @@ public class QuanLyCF extends javax.swing.JFrame {
     private void btnXemchitietBacXiu6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXemchitietBacXiu6ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnXemchitietBacXiu6ActionPerformed
+
+    private void btnMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMenuActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_btnMenuActionPerformed
 
     /**
      * @param args the command line arguments
@@ -413,6 +481,9 @@ public class QuanLyCF extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnMenu;
+    private javax.swing.JButton btnQLKH;
+    private javax.swing.JButton btnQLNL;
     private javax.swing.JButton btnXemchitietBacXiu;
     private javax.swing.JButton btnXemchitietBacXiu1;
     private javax.swing.JButton btnXemchitietBacXiu2;

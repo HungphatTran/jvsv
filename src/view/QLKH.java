@@ -4,6 +4,8 @@
  */
 package view;
 
+import java.awt.BorderLayout;
+import java.awt.Font;
 import java.util.List;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -20,6 +22,28 @@ public class QLKH extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         setTitle("Quản lý khách hàng");
         loadTable();
+        
+        setTitle("Trang Quản lý Khách Hàng");
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+
+        JPanel panel = new JPanel();
+        JLabel label = new JLabel("<html><center>Bạn đang ở<br>Trang Quản lý Khách Hàng</center></html>");
+        label.setFont(new Font("Segoe UI", Font.BOLD, 24));
+        panel.add(label);
+        add(panel, BorderLayout.CENTER);
+        
+        // Nút "Quay lại" (tùy chọn)
+        JButton btnQuayLai = new JButton("Quay lại Trang Chính");
+        btnQuayLai.addActionListener(e -> {
+            this.dispose(); // Đóng QuanLyKhachHangFrame hiện tại
+            new QuanLyCF().setVisible(true); // Tạo và hiển thị lại QuanLyCF
+        });
+        JPanel southPanel = new JPanel();
+        southPanel.add(btnQuayLai);
+        add(southPanel, BorderLayout.SOUTH);
+
+        setLocationRelativeTo(null);
+        
     }
 
     void loadTable() {
