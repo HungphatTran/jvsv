@@ -294,6 +294,10 @@ public class QLKH extends javax.swing.JFrame {
 
     private void btnClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearActionPerformed
         // TODO add your handling code here:
+        txtMaKH.setText("");
+        txtTenKH.setText("");
+        txtSDT.setText("");
+        txtDiem.setText("");
     }//GEN-LAST:event_btnClearActionPerformed
 
     private void tblKhachHangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblKhachHangMouseClicked
