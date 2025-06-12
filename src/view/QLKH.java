@@ -22,7 +22,7 @@ public class QLKH extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         setTitle("Quản lý khách hàng");
         loadTable();
-        
+
         setTitle("Trang Quản lý Khách Hàng");
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
@@ -31,7 +31,7 @@ public class QLKH extends javax.swing.JFrame {
         label.setFont(new Font("Segoe UI", Font.BOLD, 24));
         panel.add(label);
         add(panel, BorderLayout.CENTER);
-        
+
         // Nút "Quay lại" (tùy chọn)
         JButton btnQuayLai = new JButton("Quay lại Trang Chính");
         btnQuayLai.addActionListener(e -> {
@@ -43,7 +43,7 @@ public class QLKH extends javax.swing.JFrame {
         add(southPanel, BorderLayout.SOUTH);
 
         setLocationRelativeTo(null);
-        
+
     }
 
     void loadTable() {
@@ -106,6 +106,8 @@ public class QLKH extends javax.swing.JFrame {
         tblKhachHang = new javax.swing.JTable();
         btnXoa1 = new javax.swing.JButton();
         btnClear = new javax.swing.JButton();
+        btnMenu = new javax.swing.JButton();
+        btnQLNL = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -173,6 +175,20 @@ public class QLKH extends javax.swing.JFrame {
             }
         });
 
+        btnMenu.setText("MENU");
+        btnMenu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMenuActionPerformed(evt);
+            }
+        });
+
+        btnQLNL.setText("QLNL");
+        btnQLNL.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnQLNLActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -221,6 +237,12 @@ public class QLKH extends javax.swing.JFrame {
                         .addGap(28, 28, 28))
                     .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnMenu)
+                .addGap(120, 120, 120)
+                .addComponent(btnQLNL)
+                .addGap(149, 149, 149))
         );
 
         layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jLabel3, jLabel4, jLabel5, jLabel6});
@@ -263,7 +285,11 @@ public class QLKH extends javax.swing.JFrame {
                     .addComponent(btnXoa1))
                 .addGap(37, 37, 37)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(184, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 111, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnQLNL)
+                    .addComponent(btnMenu))
+                .addGap(50, 50, 50))
         );
 
         layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jLabel3, jLabel4, jLabel5, jLabel6});
@@ -272,8 +298,10 @@ public class QLKH extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
-             KhachHang kh = getFormData();
-        if (kh == null) return;
+        KhachHang kh = getFormData();
+        if (kh == null) {
+            return;
+        }
 
         if (dao.insert(kh)) {
             JOptionPane.showMessageDialog(this, "Thêm thành công!");
@@ -286,8 +314,10 @@ public class QLKH extends javax.swing.JFrame {
 
     private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
         // TODO add your handling code here:
-                KhachHang kh = getFormData();
-        if (kh == null) return;
+        KhachHang kh = getFormData();
+        if (kh == null) {
+            return;
+        }
 
         if (dao.update(kh)) {
             JOptionPane.showMessageDialog(this, "Sửa thành công!");
@@ -300,7 +330,7 @@ public class QLKH extends javax.swing.JFrame {
 
     private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
         // TODO add your handling code here:
-                int row = tblKhachHang.getSelectedRow();
+        int row = tblKhachHang.getSelectedRow();
         if (row == -1) {
             JOptionPane.showMessageDialog(this, "Chọn khách hàng để xóa");
             return;
@@ -331,6 +361,18 @@ public class QLKH extends javax.swing.JFrame {
         txtSDT.setText(tblKhachHang.getValueAt(row, 2).toString());
         txtDiem.setText(tblKhachHang.getValueAt(row, 3).toString());        // TODO add your handling code here:
     }//GEN-LAST:event_tblKhachHangMouseClicked
+
+    private void btnMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMenuActionPerformed
+        // TODO add your handling code here:
+        new QuanLyCF().setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnMenuActionPerformed
+
+    private void btnQLNLActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQLNLActionPerformed
+        // TODO add your handling code here:
+        new QuanLyNguyenLieu().setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnQLNLActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -366,6 +408,8 @@ public class QLKH extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnClear;
+    private javax.swing.JButton btnMenu;
+    private javax.swing.JButton btnQLNL;
     private javax.swing.JButton btnSua;
     private javax.swing.JButton btnThem;
     private javax.swing.JButton btnXoa;

@@ -45,7 +45,6 @@
                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                   <Component id="btnQLNL" max="32767" attributes="0"/>
                                   <Component id="btnQLKH" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="btnMenu" alignment="0" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
@@ -79,9 +78,7 @@
                       </Group>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="79" max="-2" attributes="0"/>
-                      <Component id="btnMenu" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="140" max="-2" attributes="0"/>
                       <Component id="btnQLKH" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="42" max="-2" attributes="0"/>
                       <Component id="btnQLNL" min="-2" max="-2" attributes="0"/>
@@ -514,18 +511,16 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="QLKH"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnQLKHActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btnQLNL">
       <Properties>
         <Property name="text" type="java.lang.String" value="QL Nguy&#xea;n Li&#x1ec7;u"/>
       </Properties>
-    </Component>
-    <Component class="javax.swing.JButton" name="btnMenu">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="MENU"/>
-      </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnMenuActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnQLNLActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>

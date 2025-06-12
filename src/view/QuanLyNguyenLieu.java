@@ -84,78 +84,75 @@ public class QuanLyNguyenLieu extends javax.swing.JFrame {
     }
 
     public void suaNL() {
-    i = tblNL.getSelectedRow();
-    if (i >= 0) {
-        int choice = JOptionPane.showConfirmDialog(this, "Bạn có thực sự muốn sửa?", 
-                "Xác nhận", JOptionPane.YES_NO_OPTION);
+        i = tblNL.getSelectedRow();
+        if (i >= 0) {
+            int choice = JOptionPane.showConfirmDialog(this, "Bạn có thực sự muốn sửa?",
+                    "Xác nhận", JOptionPane.YES_NO_OPTION);
 
-        if (choice == JOptionPane.YES_OPTION) {
-            // Lấy bản ghi cũ từ danh sách
-            NguyenLieu nlCu = nlDAO.getAll().get(i);
-            String maCu = nlCu.getMaNL(); // MaNL cũ (primary key)
+            if (choice == JOptionPane.YES_OPTION) {
+                // Lấy bản ghi cũ từ danh sách
+                NguyenLieu nlCu = nlDAO.getAll().get(i);
+                String maCu = nlCu.getMaNL(); // MaNL cũ (primary key)
 
-            // Lấy dữ liệu mới từ form
-            String maNL = txtMaNL.getText();
-            String tenNL = txtTenNL.getText();
-            
-            // Chuyển đổi ngày nhập
-            String ngayNhapStr = txtNgayNhap.getText();
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-            java.util.Date utilDate = null;
-            try {
-                utilDate = sdf.parse(ngayNhapStr);
-            } catch (ParseException e) {
-                JOptionPane.showMessageDialog(this, "Ngày nhập không hợp lệ!");
-                return;
+                // Lấy dữ liệu mới từ form
+                String maNL = txtMaNL.getText();
+                String tenNL = txtTenNL.getText();
+
+                // Chuyển đổi ngày nhập
+                String ngayNhapStr = txtNgayNhap.getText();
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                java.util.Date utilDate = null;
+                try {
+                    utilDate = sdf.parse(ngayNhapStr);
+                } catch (ParseException e) {
+                    JOptionPane.showMessageDialog(this, "Ngày nhập không hợp lệ!");
+                    return;
+                }
+                java.sql.Date ngayNhap = new java.sql.Date(utilDate.getTime());
+
+                double giaNhap = Double.parseDouble(txtGiaNhap.getText());
+                String maSP = txtMaSP.getText();
+
+                // Tạo đối tượng NguyenLieu mới
+                NguyenLieu nlMoi = new NguyenLieu(maNL, tenNL, ngayNhap, giaNhap, maSP);
+
+                // Gọi DAO để sửa
+                int result = nlDAO.editNL(nlMoi, maCu);
+
+                if (result == 1) {
+                    fillTable();
+                    JOptionPane.showMessageDialog(this, "Sửa nguyên liệu thành công!");
+                } else {
+                    JOptionPane.showMessageDialog(this, "Có lỗi xảy ra!");
+                }
             }
-            java.sql.Date ngayNhap = new java.sql.Date(utilDate.getTime());
-            
-            double giaNhap = Double.parseDouble(txtGiaNhap.getText());
-            String maSP = txtMaSP.getText();
-
-            // Tạo đối tượng NguyenLieu mới
-            NguyenLieu nlMoi = new NguyenLieu(maNL, tenNL, ngayNhap, giaNhap, maSP);
-
-            // Gọi DAO để sửa
-            int result = nlDAO.editNL(nlMoi, maCu);
-
-            if (result == 1) {
-                fillTable();
-                JOptionPane.showMessageDialog(this, "Sửa nguyên liệu thành công!");
-            } else {
-                JOptionPane.showMessageDialog(this, "Có lỗi xảy ra!");
-            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Chọn nguyên liệu để sửa!");
         }
-    } else {
-        JOptionPane.showMessageDialog(this, "Chọn nguyên liệu để sửa!");
     }
-}
-
 
     public void xoaNL() {
-    i = tblNL.getSelectedRow();
-    if (i >= 0) {
-        int choice = JOptionPane.showConfirmDialog(this, "Bạn có thực sự muốn xóa?",
-                "Xác nhận", JOptionPane.YES_NO_OPTION);
+        i = tblNL.getSelectedRow();
+        if (i >= 0) {
+            int choice = JOptionPane.showConfirmDialog(this, "Bạn có thực sự muốn xóa?",
+                    "Xác nhận", JOptionPane.YES_NO_OPTION);
 
-        if (choice == JOptionPane.YES_OPTION) {
-            NguyenLieu nl = nlDAO.getAll().get(i);
-            String maNL = nl.getMaNL(); // MaNL là String
-            int result = nlDAO.deleteNL(maNL);
-            if (result == 1) {
-                fillTable();
-                JOptionPane.showMessageDialog(this, "Xóa nguyên liệu thành công!");
-            } else {
-                JOptionPane.showMessageDialog(this, "Có lỗi xảy ra!");
+            if (choice == JOptionPane.YES_OPTION) {
+                NguyenLieu nl = nlDAO.getAll().get(i);
+                String maNL = nl.getMaNL(); // MaNL là String
+                int result = nlDAO.deleteNL(maNL);
+                if (result == 1) {
+                    fillTable();
+                    JOptionPane.showMessageDialog(this, "Xóa nguyên liệu thành công!");
+                } else {
+                    JOptionPane.showMessageDialog(this, "Có lỗi xảy ra!");
+                }
             }
+
+        } else {
+            JOptionPane.showMessageDialog(this, "Chọn nguyên liệu để xóa!");
         }
-
-    } else {
-        JOptionPane.showMessageDialog(this, "Chọn nguyên liệu để xóa!");
     }
-}
-
-
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -183,6 +180,8 @@ public class QuanLyNguyenLieu extends javax.swing.JFrame {
         btndelete = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblNL = new javax.swing.JTable();
+        btnMenu = new javax.swing.JButton();
+        btnQLKH = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -267,6 +266,20 @@ public class QuanLyNguyenLieu extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tblNL);
 
+        btnMenu.setText("MENU");
+        btnMenu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMenuActionPerformed(evt);
+            }
+        });
+
+        btnQLKH.setText("QLKH");
+        btnQLKH.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnQLKHActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -277,16 +290,23 @@ public class QuanLyNguyenLieu extends javax.swing.JFrame {
                         .addGap(360, 360, 360)
                         .addComponent(jLabel1))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(276, 276, 276)
+                        .addGap(36, 36, 36)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel7)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel6)
-                                    .addComponent(jLabel2)
-                                    .addComponent(jLabel3)
-                                    .addComponent(jLabel4)
-                                    .addComponent(jLabel5))
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(jLabel2)
+                                        .addComponent(jLabel3)
+                                        .addComponent(jLabel4)
+                                        .addComponent(jLabel5)
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addComponent(btnMenu)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(jLabel6)))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(btnQLKH)
+                                        .addGap(154, 154, 154)))
                                 .addGap(18, 18, 18)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(txtMaNL, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -299,11 +319,11 @@ public class QuanLyNguyenLieu extends javax.swing.JFrame {
                             .addComponent(btnedit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnadd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btndelete, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(359, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 180, Short.MAX_VALUE)
+                .addGap(0, 181, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 737, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(169, 169, 169))
+                .addGap(168, 168, 168))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -331,15 +351,25 @@ public class QuanLyNguyenLieu extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(txtGiaNhap, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(22, 22, 22)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel6)
-                        .addComponent(txtMaSP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(btndelete, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 334, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(28, 28, 28))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(22, 22, 22)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jLabel6)
+                                .addComponent(txtMaSP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(btndelete, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnMenu)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 334, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(34, 34, 34)
+                        .addComponent(btnQLKH)))
+                .addContainerGap(22, Short.MAX_VALUE))
         );
 
         pack();
@@ -377,6 +407,18 @@ public class QuanLyNguyenLieu extends javax.swing.JFrame {
         showDetails();
     }//GEN-LAST:event_tblNLMouseClicked
 
+    private void btnMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMenuActionPerformed
+        // TODO add your handling code here:
+        new QuanLyCF().setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnMenuActionPerformed
+
+    private void btnQLKHActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQLKHActionPerformed
+        // TODO add your handling code here:
+        new QLKH().setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnQLKHActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -413,6 +455,8 @@ public class QuanLyNguyenLieu extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnMenu;
+    private javax.swing.JButton btnQLKH;
     private javax.swing.JButton btnadd;
     private javax.swing.JButton btndelete;
     private javax.swing.JButton btnedit;

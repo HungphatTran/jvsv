@@ -88,7 +88,6 @@ public class QuanLyCF extends javax.swing.JFrame {
         textCaPheNau = new javax.swing.JLabel();
         btnQLKH = new javax.swing.JButton();
         btnQLNL = new javax.swing.JButton();
-        btnMenu = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -342,13 +341,16 @@ public class QuanLyCF extends javax.swing.JFrame {
         );
 
         btnQLKH.setText("QLKH");
+        btnQLKH.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnQLKHActionPerformed(evt);
+            }
+        });
 
         btnQLNL.setText("QL Nguyên Liệu");
-
-        btnMenu.setText("MENU");
-        btnMenu.addActionListener(new java.awt.event.ActionListener() {
+        btnQLNL.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnMenuActionPerformed(evt);
+                btnQLNLActionPerformed(evt);
             }
         });
 
@@ -375,8 +377,7 @@ public class QuanLyCF extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 98, Short.MAX_VALUE)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(btnQLNL, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(btnQLKH, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(btnMenu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
+                                    .addComponent(btnQLKH, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(259, 259, 259)
                         .addComponent(lbMenu))
@@ -399,9 +400,7 @@ public class QuanLyCF extends javax.swing.JFrame {
                             .addComponent(pnCFNau, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(pnBxiu, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(79, 79, 79)
-                        .addComponent(btnMenu)
-                        .addGap(38, 38, 38)
+                        .addGap(140, 140, 140)
                         .addComponent(btnQLKH)
                         .addGap(42, 42, 42)
                         .addComponent(btnQLNL)))
@@ -440,10 +439,17 @@ public class QuanLyCF extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnXemchitietBacXiu6ActionPerformed
 
-    private void btnMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMenuActionPerformed
+    private void btnQLKHActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQLKHActionPerformed
         // TODO add your handling code here:
-        
-    }//GEN-LAST:event_btnMenuActionPerformed
+                new QLKH().setVisible(true);
+                this.dispose();
+    }//GEN-LAST:event_btnQLKHActionPerformed
+
+    private void btnQLNLActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQLNLActionPerformed
+        // TODO add your handling code here:
+        new QuanLyNguyenLieu().setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnQLNLActionPerformed
 
     /**
      * @param args the command line arguments
@@ -481,7 +487,6 @@ public class QuanLyCF extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnMenu;
     private javax.swing.JButton btnQLKH;
     private javax.swing.JButton btnQLNL;
     private javax.swing.JButton btnXemchitietBacXiu;
