@@ -137,9 +137,9 @@ public class LoginRegisterFrame extends javax.swing.JFrame {
             if (loginUser != null) {
                 JOptionPane.showMessageDialog(this, "Đăng nhập thành công!");
                 if ("admin".equalsIgnoreCase(loginUser.getRole())) {
-                    new QuanLyNguyenLieu().setVisible(true); // Trang chủ quản lý
+                    new TrangChuQL().setVisible(true); // Trang chủ quản lý
                 } else {
-                    new QuanLyCF().setVisible(true); // Trang chủ nhân viên
+                    new TrangChuNV().setVisible(true); // Trang chủ nhân viên
                 }
                 this.dispose();
             } else {

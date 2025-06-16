@@ -2,41 +2,46 @@ package view;
 
 import javax.swing.*;
 
-public class TrangChuNV extends JFrame {
-    private JButton btnQLBan, btnQLDonGoiMon, btnQuanLyMenu, btnDangXuat;
-
-    public TrangChuNV() {
-        setTitle("Trang chủ nhân viên");
-        setSize(400, 400);
+public class TrangChuQL extends JFrame {
+    public TrangChuQL() {
+        setTitle("Trang chủ quản lý");
+        setSize(400, 550);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         setLayout(null);
 
-        JLabel lblTitle = new JLabel("Trang chủ nhân viên");
+        JLabel lblTitle = new JLabel("Trang chủ quản lý");
         lblTitle.setBounds(120, 30, 200, 30);
         add(lblTitle);
 
-        btnQLBan = new JButton("Quản lý bàn");
-        btnQLBan.setBounds(120, 80, 150, 30);
-        add(btnQLBan);
+        // Nút Quản lý nguyên liệu
+        JButton btnQLNguyenLieu = new JButton("Quản lý nguyên liệu");
+        btnQLNguyenLieu.setBounds(120, 100, 150, 30);
+        add(btnQLNguyenLieu);
+        btnQLNguyenLieu.addActionListener(e -> new QuanLyNguyenLieu().setVisible(true));
 
-        btnQLDonGoiMon = new JButton("Quản lý đơn gọi món");
-        btnQLDonGoiMon.setBounds(120, 120, 150, 30);
-        add(btnQLDonGoiMon);
+        // Nút Quản lý khách hàng
+        JButton btnQLKhachHang = new JButton("Quản lý khách hàng");
+        btnQLKhachHang.setBounds(120, 150, 150, 30);
+        add(btnQLKhachHang);
+        btnQLKhachHang.addActionListener(e -> new QLKH().setVisible(true));
 
-        btnQuanLyMenu = new JButton("Quản lý menu");
-        btnQuanLyMenu.setBounds(120, 160, 150, 30);
-        add(btnQuanLyMenu);
+        // Nút Quản lý doanh thu
+        JButton btnQLDoanhThu = new JButton("Quản lý doanh thu");
+        btnQLDoanhThu.setBounds(120, 200, 150, 30);
+        add(btnQLDoanhThu);
+        btnQLDoanhThu.addActionListener(e -> new QLDT().setVisible(true));
+
+        // Nút Quản lý nhân viên
+        JButton btnQLNhanVien = new JButton("Quản lý nhân viên");
+        btnQLNhanVien.setBounds(120, 250, 150, 30);
+        add(btnQLNhanVien);
+        btnQLNhanVien.addActionListener(e -> new QLNV().setVisible(true));
 
         // Nút Đăng xuất
-        btnDangXuat = new JButton("Đăng xuất");
-        btnDangXuat.setBounds(120, 210, 150, 30);
+        JButton btnDangXuat = new JButton("Đăng xuất");
+        btnDangXuat.setBounds(120, 320, 150, 30);
         add(btnDangXuat);
-
-        // Sự kiện mở các JFrame chức năng
-        btnQLBan.addActionListener(e -> new QLBan().setVisible(true));
-        btnQLDonGoiMon.addActionListener(e -> new QLDonGoiMon().setVisible(true));
-        btnQuanLyMenu.addActionListener(e -> new QuanLyCF().setVisible(true));
         btnDangXuat.addActionListener(e -> {
             new LoginRegisterFrame().setVisible(true);
             this.dispose();
@@ -44,14 +49,9 @@ public class TrangChuNV extends JFrame {
     }
 
     // ... giữ nguyên phần initComponents() của NetBeans nếu có, nhưng KHÔNG gọi đến nó ...
-    // Hàm initComponents() của NetBeans vẫn giữ nguyên, nhưng KHÔNG gọi đến nó!
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">
-    // ... code NetBeans sinh ra ...
-    // </editor-fold>
 
 
-      
-      
+    @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
@@ -88,20 +88,20 @@ public class TrangChuNV extends JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(TrangChuNV.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TrangChuQL.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(TrangChuNV.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TrangChuQL.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(TrangChuNV.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TrangChuQL.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(TrangChuNV.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TrangChuQL.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new TrangChuNV().setVisible(true);
+                new TrangChuQL().setVisible(true);
             }
         });
     }

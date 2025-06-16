@@ -51,7 +51,7 @@ public class QLDT extends javax.swing.JFrame {
         JButton btnLamMoi = new JButton("Làm mới");
         btnLamMoi.setBounds(480, 300, 90, 30);
         add(btnLamMoi);
-        // Load dữ liệu
+        // Load dữ liệu 
         loadTable();
 
         btnLamMoi.addActionListener(e -> loadTable());

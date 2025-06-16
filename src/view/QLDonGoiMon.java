@@ -12,6 +12,7 @@ import model.DonGoiMon;
 import service.DonGoiMonDAO;
 import java.sql.Date;
 import java.util.List;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -24,6 +25,7 @@ public class QLDonGoiMon extends javax.swing.JFrame {
         initComponents();
         initTable();
         fillTable();
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     }
     DonGoiMonDAO dao = new DonGoiMonDAO();
     DefaultTableModel model;
