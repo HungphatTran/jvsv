@@ -21,13 +21,11 @@ public class QuanLyCF extends javax.swing.JFrame {
     /**
      * Creates new form QuanLyCF
      */
-    
-     private DefaultTableModel model;
-     
+    private DefaultTableModel model;
+
     public QuanLyCF() {
         initComponents();
-        
-        
+
         setTitle("Trang Menu Chính");
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE); // Đóng Frame này khi nhấn X
 
@@ -48,7 +46,7 @@ public class QuanLyCF extends javax.swing.JFrame {
         add(southPanel, BorderLayout.SOUTH);
 
         setLocationRelativeTo(null);
-        
+
     }
 
     /**
@@ -441,8 +439,8 @@ public class QuanLyCF extends javax.swing.JFrame {
 
     private void btnQLKHActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQLKHActionPerformed
         // TODO add your handling code here:
-                new QLKH().setVisible(true);
-                this.dispose();
+        new QLKH().setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_btnQLKHActionPerformed
 
     private void btnQLNLActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQLNLActionPerformed
