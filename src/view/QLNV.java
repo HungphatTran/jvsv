@@ -4,67 +4,109 @@
  */
 package view;
 
-/**
- *
- * @author ADMIN
- */
-import model.DonGoiMon;
-import service.DonGoiMonDAO;
 import java.sql.Date;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import model.NhanVien;
+import service.NhanVienDAO;
 
-public class QLDonGoiMon extends javax.swing.JFrame {
+/**
+ *
+ * @author ADMIN
+ */
+public class QLNV extends javax.swing.JFrame {
 
     /**
-     * Creates new form QLDonGoiMon
+     * Creates new form QLNV
      */
-    public QLDonGoiMon() {
+    public QLNV() {
         initComponents();
         initTable();
         fillTable();
     }
-    DonGoiMonDAO dao = new DonGoiMonDAO();
     DefaultTableModel model;
-    
+    NhanVienDAO dao = new NhanVienDAO();
+
     public void initTable() {
-        String[] cols = new String[]{"MÃ ĐƠN", "Tên ĐƠN", "Ngày Nhập", "TỔNG TIỀN", "TRẠNG THÁI", "GHI CHÚ"};
+        String[] cols = new String[]{"ID NV", "Tên Nhân Viên", "Địa Chỉ", "SĐT", "Vai Trò", "Ngày Vào Làm"};
         model = new DefaultTableModel();
         model.setColumnIdentifiers(cols);
-        tblDonGoiMon.setModel(model);
+        tblNV.setModel(model);
     }
-    
-public void fillTable() {
+
+    public void fillTable() {
         model.setRowCount(0);
-        for (DonGoiMon dgm : dao.getAll()) {
-            model.addRow(dao.getRow(dgm));
+        for (NhanVien nv : dao.getAll()) {
+            model.addRow(dao.getRow(nv));
         }
     }
-    
-    private void clearForm() {
-    txtMaDon.setText("");
-    txtTenDon.setText("");
-    txtNgayNhap.setText("");
-    txtTongTien.setText("");
-    txtTrangThai.setText("");
-    txtGhiChu.setText("");
-}
 
-private DonGoiMon getFormData() {
-    try {
-        String ma = txtMaDon.getText();
-        String ten = txtTenDon.getText();
-        Date ngay = Date.valueOf(txtNgayNhap.getText());
-        int tongTien = Integer.parseInt(txtTongTien.getText());
-        String trangThai = txtTrangThai.getText();
-        String ghiChu = txtGhiChu.getText();
-        return new DonGoiMon(ma, ten, ngay, tongTien, trangThai, ghiChu);
-    } catch (Exception e) {
-        JOptionPane.showMessageDialog(this, "Dữ liệu không hợp lệ!");
-        return null;
+    private void add() {
+        try {
+            String id_nv = txtIDNV.getText();
+            String ten_nv = txtTenNV.getText();
+            String dia_chi = txtDiaChi.getText();
+            String sdt = txtSDT.getText();
+            String vai_tro = txtVaiTro.getText(); // Lấy từ JTextField
+            java.sql.Date ngay_vao_lam = java.sql.Date.valueOf(txtNgayVaoLam.getText());
+
+            NhanVien nv = new NhanVien(id_nv, ten_nv, dia_chi, sdt, vai_tro, ngay_vao_lam);
+            if (dao.add(nv) > 0) {
+                fillTable();
+                JOptionPane.showMessageDialog(this, "Thêm nhân viên thành công");
+            } else {
+                JOptionPane.showMessageDialog(this, "Thêm thất bại");
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Lỗi thêm: " + e.getMessage());
+        }
     }
-}
+
+    private void edit() {
+        int row = tblNV.getSelectedRow();
+        if (row >= 0) {
+            try {
+                String idCu = model.getValueAt(row, 0).toString();
+                String id_nv = txtIDNV.getText();
+                String ten_nv = txtTenNV.getText();
+                String dia_chi = txtDiaChi.getText();
+                String sdt = txtSDT.getText();
+                String vai_tro = txtVaiTro.getText(); // Lấy từ JTextField
+                java.sql.Date ngay_vao_lam = java.sql.Date.valueOf(txtNgayVaoLam.getText());
+
+                NhanVien nv = new NhanVien(id_nv, ten_nv, dia_chi, sdt, vai_tro, ngay_vao_lam);
+                if (dao.update(nv, idCu) > 0) {
+                    fillTable();
+                    JOptionPane.showMessageDialog(this, "Sửa thành công");
+                } else {
+                    JOptionPane.showMessageDialog(this, "Sửa thất bại");
+                }
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(this, "Lỗi sửa: " + e.getMessage());
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Vui lòng chọn nhân viên cần sửa");
+        }
+    }
+
+    private void delete() {
+        int row = tblNV.getSelectedRow();
+        if (row >= 0) {
+            String id_nv = model.getValueAt(row, 0).toString();
+            int confirm = JOptionPane.showConfirmDialog(this, "Bạn có chắc chắn muốn xóa không?", "Xác nhận", JOptionPane.YES_NO_OPTION);
+            if (confirm == JOptionPane.YES_OPTION) {
+                if (dao.delete(id_nv) > 0) {
+                    fillTable();
+                    JOptionPane.showMessageDialog(this, "Xóa thành công");
+                } else {
+                    JOptionPane.showMessageDialog(this, "Xóa thất bại");
+                }
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Vui lòng chọn nhân viên cần xóa");
+        }
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -75,67 +117,38 @@ private DonGoiMon getFormData() {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        btnedit = new javax.swing.JButton();
-        jLabel4 = new javax.swing.JLabel();
-        btndelete = new javax.swing.JButton();
+        txtNgayVaoLam = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        tblDonGoiMon = new javax.swing.JTable();
-        jLabel6 = new javax.swing.JLabel();
-        txtMaDon = new javax.swing.JTextField();
-        btnMenu = new javax.swing.JButton();
-        txtTenDon = new javax.swing.JTextField();
-        btnQLKH = new javax.swing.JButton();
-        txtNgayNhap = new javax.swing.JTextField();
-        txtTongTien = new javax.swing.JTextField();
-        txtGhiChu = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tblNV = new javax.swing.JTable();
         jLabel7 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
         btnadd = new javax.swing.JButton();
+        txtIDNV = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        txtTrangThai = new javax.swing.JTextField();
+        btnMenu = new javax.swing.JButton();
+        txtVaiTro = new javax.swing.JTextField();
+        txtTenNV = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
+        btnQLKH = new javax.swing.JButton();
+        btnedit = new javax.swing.JButton();
+        txtDiaChi = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
+        txtSDT = new javax.swing.JTextField();
+        btndelete = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        btnedit.setText("Sửa");
-        btnedit.setMaximumSize(new java.awt.Dimension(90, 35));
-        btnedit.setMinimumSize(new java.awt.Dimension(90, 35));
-        btnedit.setPreferredSize(new java.awt.Dimension(90, 35));
-        btnedit.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btneditMouseClicked(evt);
-            }
-        });
-        btnedit.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btneditActionPerformed(evt);
-            }
-        });
-
-        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel4.setText("Ngày Nhập:");
-
-        btndelete.setText("Xóa");
-        btndelete.setMaximumSize(new java.awt.Dimension(90, 35));
-        btndelete.setMinimumSize(new java.awt.Dimension(90, 35));
-        btndelete.setPreferredSize(new java.awt.Dimension(90, 35));
-        btndelete.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btndeleteMouseClicked(evt);
-            }
-        });
-        btndelete.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btndeleteActionPerformed(evt);
-            }
-        });
-
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel5.setText("Tổng Tiền:");
+        jLabel5.setText("SĐT:");
 
-        tblDonGoiMon.setModel(new javax.swing.table.DefaultTableModel(
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(0, 0, 255));
+        jLabel1.setText("Quản Lý Cà Phê");
+
+        tblNV.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},
                 {null, null, null, null, null},
@@ -146,40 +159,22 @@ private DonGoiMon getFormData() {
                 "Mã NL", "Tên NL", "Ngày Nhập", "Giá Nhập", "Mã SP"
             }
         ));
-        tblDonGoiMon.addMouseListener(new java.awt.event.MouseAdapter() {
+        tblNV.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tblDonGoiMonMouseClicked(evt);
+                tblNVMouseClicked(evt);
             }
         });
-        jScrollPane1.setViewportView(tblDonGoiMon);
-
-        jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel6.setText("Trạng Thái:");
-
-        btnMenu.setText("MENU");
-        btnMenu.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnMenuActionPerformed(evt);
-            }
-        });
-
-        btnQLKH.setText("QLKH");
-        btnQLKH.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnQLKHActionPerformed(evt);
-            }
-        });
-
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(0, 0, 255));
-        jLabel1.setText("Quản Lý Cà Phê");
+        jScrollPane1.setViewportView(tblNV);
 
         jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(0, 0, 255));
-        jLabel7.setText("Quản Lý Đơn Gọi Món");
+        jLabel7.setText("Quản Lý Nhân Viên");
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel2.setText("Mã Đơn:");
+        jLabel2.setText("ID Nhân Viên:");
+
+        jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel6.setText("Vai Trò:");
 
         btnadd.setText("Thêm");
         btnadd.setMaximumSize(new java.awt.Dimension(90, 35));
@@ -197,16 +192,63 @@ private DonGoiMon getFormData() {
         });
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel3.setText("Tên Đơn:");
+        jLabel3.setText("Tên Nhân Viên:");
 
-        txtTrangThai.addActionListener(new java.awt.event.ActionListener() {
+        btnMenu.setText("MENU");
+        btnMenu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtTrangThaiActionPerformed(evt);
+                btnMenuActionPerformed(evt);
+            }
+        });
+
+        txtVaiTro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtVaiTroActionPerformed(evt);
             }
         });
 
         jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel8.setText("Ghi Chú:");
+        jLabel8.setText("Ngày vào làm:");
+
+        btnQLKH.setText("QLKH");
+        btnQLKH.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnQLKHActionPerformed(evt);
+            }
+        });
+
+        btnedit.setText("Sửa");
+        btnedit.setMaximumSize(new java.awt.Dimension(90, 35));
+        btnedit.setMinimumSize(new java.awt.Dimension(90, 35));
+        btnedit.setPreferredSize(new java.awt.Dimension(90, 35));
+        btnedit.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btneditMouseClicked(evt);
+            }
+        });
+        btnedit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btneditActionPerformed(evt);
+            }
+        });
+
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel4.setText("Địa Chỉ:");
+
+        btndelete.setText("Xóa");
+        btndelete.setMaximumSize(new java.awt.Dimension(90, 35));
+        btndelete.setMinimumSize(new java.awt.Dimension(90, 35));
+        btndelete.setPreferredSize(new java.awt.Dimension(90, 35));
+        btndelete.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btndeleteMouseClicked(evt);
+            }
+        });
+        btndelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btndeleteActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -242,12 +284,12 @@ private DonGoiMon getFormData() {
                                             .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING))
                                         .addGap(18, 18, 18)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(txtMaDon, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(txtGhiChu, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(txtTongTien, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(txtNgayNhap, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(txtTenDon, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(txtTrangThai, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                            .addComponent(txtIDNV, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(txtNgayVaoLam, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(txtSDT, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(txtDiaChi, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(txtTenNV, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(txtVaiTro, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE))))
                                 .addGap(67, 67, 67)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(btnedit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -272,27 +314,27 @@ private DonGoiMon getFormData() {
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2)
-                            .addComponent(txtMaDon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtIDNV, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel3)
-                            .addComponent(txtTenDon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtTenNV, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel4)
-                            .addComponent(txtNgayNhap, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtDiaChi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel5)
-                            .addComponent(txtTongTien, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtSDT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(22, 22, 22)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel6)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(txtTrangThai, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtVaiTro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(txtGhiChu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtNgayVaoLam, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel8)))))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -301,7 +343,7 @@ private DonGoiMon getFormData() {
                         .addComponent(btnedit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(87, 87, 87)
                         .addComponent(btndelete, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 67, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 334, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(59, 59, 59))
         );
@@ -309,54 +351,18 @@ private DonGoiMon getFormData() {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btneditMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btneditMouseClicked
+    private void tblNVMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblNVMouseClicked
         // TODO add your handling code here:
-    }//GEN-LAST:event_btneditMouseClicked
-
-    private void btneditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btneditActionPerformed
-        // TODO add your handling code here:
-        int row = tblDonGoiMon.getSelectedRow();
-    if (row >= 0) {
-        String maCu = model.getValueAt(row, 0).toString();
-        DonGoiMon d = getFormData();
-        if (d != null) {
-            if (dao.update(d, maCu) > 0) {
-                fillTable();
-                clearForm();
-                JOptionPane.showMessageDialog(this, "Sửa thành công");
-            }
+        int row = tblNV.getSelectedRow();
+        if (row >= 0) {
+            txtIDNV.setText(model.getValueAt(row, 0).toString());
+            txtTenNV.setText(model.getValueAt(row, 1).toString());
+            txtDiaChi.setText(model.getValueAt(row, 2).toString());
+            txtSDT.setText(model.getValueAt(row, 3).toString());
+            txtVaiTro.setText(model.getValueAt(row, 4).toString());
+            txtNgayVaoLam.setText(model.getValueAt(row, 5).toString());
         }
-    }
-    }//GEN-LAST:event_btneditActionPerformed
-
-    private void btndeleteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btndeleteMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btndeleteMouseClicked
-
-    private void tblDonGoiMonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblDonGoiMonMouseClicked
-        // TODO add your handling code here:
-        int row = tblDonGoiMon.getSelectedRow();
-    if (row >= 0) {
-        txtMaDon.setText(model.getValueAt(row, 0).toString());
-        txtTenDon.setText(model.getValueAt(row, 1).toString());
-        txtNgayNhap.setText(model.getValueAt(row, 2).toString());
-        txtTongTien.setText(model.getValueAt(row, 3).toString());
-        txtTrangThai.setText(model.getValueAt(row, 4).toString());
-        txtGhiChu.setText(model.getValueAt(row, 5).toString());
-    }
-    }//GEN-LAST:event_tblDonGoiMonMouseClicked
-
-    private void btnMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMenuActionPerformed
-        // TODO add your handling code here:
-        new QuanLyCF().setVisible(true);
-        this.dispose();
-    }//GEN-LAST:event_btnMenuActionPerformed
-
-    private void btnQLKHActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQLKHActionPerformed
-        // TODO add your handling code here:
-        new QLKH().setVisible(true);
-        this.dispose();
-    }//GEN-LAST:event_btnQLKHActionPerformed
+    }//GEN-LAST:event_tblNVMouseClicked
 
     private void btnaddMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnaddMouseClicked
 
@@ -364,31 +370,41 @@ private DonGoiMon getFormData() {
 
     private void btnaddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnaddActionPerformed
         // TODO add your handling code here:
-        DonGoiMon d = getFormData();
-    if (d != null) {
-        if (dao.add(d) > 0) {
-            fillTable();
-            clearForm();
-            JOptionPane.showMessageDialog(this, "Thêm thành công");
-        }
-    }
+        add();
     }//GEN-LAST:event_btnaddActionPerformed
 
-    private void txtTrangThaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTrangThaiActionPerformed
+    private void btnMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMenuActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtTrangThaiActionPerformed
+        new QuanLyCF().setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnMenuActionPerformed
+
+    private void txtVaiTroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtVaiTroActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtVaiTroActionPerformed
+
+    private void btnQLKHActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQLKHActionPerformed
+        // TODO add your handling code here:
+        new QLKH().setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnQLKHActionPerformed
+
+    private void btneditMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btneditMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btneditMouseClicked
+
+    private void btneditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btneditActionPerformed
+        // TODO add your handling code here:
+        edit();
+    }//GEN-LAST:event_btneditActionPerformed
+
+    private void btndeleteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btndeleteMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btndeleteMouseClicked
 
     private void btndeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btndeleteActionPerformed
         // TODO add your handling code here:
-        int row = tblDonGoiMon.getSelectedRow();
-    if (row >= 0) {
-        String ma = model.getValueAt(row, 0).toString();
-        if (dao.delete(ma) > 0) {
-            fillTable();
-            clearForm();
-            JOptionPane.showMessageDialog(this, "Xóa thành công");
-        }
-    }
+        delete();
     }//GEN-LAST:event_btndeleteActionPerformed
 
     /**
@@ -408,20 +424,20 @@ private DonGoiMon getFormData() {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(QLDonGoiMon.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(QLNV.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(QLDonGoiMon.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(QLNV.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(QLDonGoiMon.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(QLNV.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(QLDonGoiMon.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(QLNV.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new QLDonGoiMon().setVisible(true);
+                new QLNV().setVisible(true);
             }
         });
     }
@@ -441,12 +457,12 @@ private DonGoiMon getFormData() {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable tblDonGoiMon;
-    private javax.swing.JTextField txtGhiChu;
-    private javax.swing.JTextField txtMaDon;
-    private javax.swing.JTextField txtNgayNhap;
-    private javax.swing.JTextField txtTenDon;
-    private javax.swing.JTextField txtTongTien;
-    private javax.swing.JTextField txtTrangThai;
+    private javax.swing.JTable tblNV;
+    private javax.swing.JTextField txtDiaChi;
+    private javax.swing.JTextField txtIDNV;
+    private javax.swing.JTextField txtNgayVaoLam;
+    private javax.swing.JTextField txtSDT;
+    private javax.swing.JTextField txtTenNV;
+    private javax.swing.JTextField txtVaiTro;
     // End of variables declaration//GEN-END:variables
 }
