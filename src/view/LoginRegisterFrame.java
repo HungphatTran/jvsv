@@ -1,17 +1,9 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package view;
 
 import javax.swing.*;
 import model.User;
 import service.UserDAO;
 
-/**
- *
- * @author ADMIN
- */
 public class LoginRegisterFrame extends javax.swing.JFrame {
 
     private JTextField txtUsername;
@@ -20,12 +12,9 @@ public class LoginRegisterFrame extends javax.swing.JFrame {
     private JPanel panelLogin, panelRegister;
     private UserDAO userDAO = new UserDAO();
 
-    /**
-     * Creates new form LoginFrame
-     */
     public LoginRegisterFrame() {
         setTitle("Đăng nhập/Đăng ký");
-        setSize(370, 250);
+        setSize(370, 270);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         setLayout(null);
@@ -86,18 +75,6 @@ public class LoginRegisterFrame extends javax.swing.JFrame {
         txtConfirmPasswordReg.setBounds(120, 110, 180, 25);
         panelRegister.add(txtConfirmPasswordReg);
 
-        btnRegister = new JButton("Đăng ký");
-        btnRegister.setBounds(50, 160, 110, 30);
-        panelRegister.add(btnRegister);
-
-        btnSwitchToLogin = new JButton("Đăng nhập");
-        btnSwitchToLogin.setBounds(180, 160, 110, 30);
-        panelRegister.add(btnSwitchToLogin);
-
-        add(panelLogin);
-        add(panelRegister);
-        panelRegister.setVisible(false);
-        // Thêm JComboBox chọn quyền cho panel đăng ký
         JLabel lblRole = new JLabel("Quyền:");
         lblRole.setBounds(30, 150, 80, 25);
         panelRegister.add(lblRole);
@@ -107,16 +84,22 @@ public class LoginRegisterFrame extends javax.swing.JFrame {
         cboRole.setBounds(120, 150, 180, 25);
         panelRegister.add(cboRole);
 
+        btnRegister = new JButton("Đăng ký");
         btnRegister.setBounds(50, 190, 110, 30);
-        btnSwitchToLogin.setBounds(180, 190, 110, 30);
         panelRegister.add(btnRegister);
+
+        btnSwitchToLogin = new JButton("Đăng nhập");
+        btnSwitchToLogin.setBounds(180, 190, 110, 30);
         panelRegister.add(btnSwitchToLogin);
+
+        add(panelLogin);
+        add(panelRegister);
+        panelRegister.setVisible(false);
 
         // Sự kiện chuyển panel
         btnSwitchToRegister.addActionListener(e -> {
             panelLogin.setVisible(false);
             panelRegister.setVisible(true);
-            // Xóa dữ liệu cũ
             txtUsernameReg.setText("");
             txtPasswordReg.setText("");
             txtConfirmPasswordReg.setText("");
@@ -129,17 +112,26 @@ public class LoginRegisterFrame extends javax.swing.JFrame {
             txtPassword.setText("");
         });
 
-        // Sự kiện đăng nhậ
+        // Validate đăng nhập
         btnLogin.addActionListener(e -> {
-            String user = txtUsername.getText();
+            String user = txtUsername.getText().trim();
             String pass = new String(txtPassword.getPassword());
+
+            if (user.isEmpty() || pass.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Không được để trống tài khoản hoặc mật khẩu!");
+                return;
+            }
+            if (!user.matches("^[a-zA-Z0-9_]{4,}$")) {
+                JOptionPane.showMessageDialog(this, "Tên tài khoản phải từ 4 ký tự, chỉ gồm chữ, số, dấu gạch dưới!");
+                return;
+            }
             User loginUser = userDAO.checkLogin(user, pass);
             if (loginUser != null) {
                 JOptionPane.showMessageDialog(this, "Đăng nhập thành công!");
                 if ("admin".equalsIgnoreCase(loginUser.getRole())) {
-                    new TrangChuQL().setVisible(true); // Trang chủ quản lý
+                    new TrangChuQL().setVisible(true);
                 } else {
-                    new TrangChuNV().setVisible(true); // Trang chủ nhân viên
+                    new TrangChuNV().setVisible(true);
                 }
                 this.dispose();
             } else {
@@ -147,18 +139,35 @@ public class LoginRegisterFrame extends javax.swing.JFrame {
             }
         });
 
-        // Sự kiện đăng ký
+        // Validate đăng ký
         btnRegister.addActionListener(e -> {
-            String user = txtUsernameReg.getText();
+            String user = txtUsernameReg.getText().trim();
             String pass = new String(txtPasswordReg.getPassword());
             String confirm = new String(txtConfirmPasswordReg.getPassword());
             String role = cboRole.getSelectedItem().toString();
+
             if (user.isEmpty() || pass.isEmpty() || confirm.isEmpty()) {
-                JOptionPane.showMessageDialog(this, "Không được để trống!");
+                JOptionPane.showMessageDialog(this, "Không được để trống bất kỳ trường nào!");
+                return;
+            }
+            if (!user.matches("^[a-zA-Z0-9_]{4,}$")) {
+                JOptionPane.showMessageDialog(this, "Tên tài khoản phải từ 4 ký tự, chỉ gồm chữ, số, dấu gạch dưới!");
+                return;
+            }
+            if (pass.length() < 6) {
+                JOptionPane.showMessageDialog(this, "Mật khẩu phải từ 6 ký tự trở lên!");
+                return;
+            }
+            if (pass.contains(" ")) {
+                JOptionPane.showMessageDialog(this, "Mật khẩu không được chứa khoảng trắng!");
                 return;
             }
             if (!pass.equals(confirm)) {
                 JOptionPane.showMessageDialog(this, "Mật khẩu xác nhận không khớp!");
+                return;
+            }
+            if (userDAO.findByUsername(user) != null) {
+                JOptionPane.showMessageDialog(this, "Tài khoản đã tồn tại!");
                 return;
             }
             if (userDAO.insert(new User(user, pass, role))) {
@@ -168,10 +177,9 @@ public class LoginRegisterFrame extends javax.swing.JFrame {
                 txtUsername.setText(user);
                 txtPassword.setText("");
             } else {
-                JOptionPane.showMessageDialog(this, "Tài khoản đã tồn tại hoặc lỗi!");
+                JOptionPane.showMessageDialog(this, "Đăng ký thất bại! Vui lòng thử lại.");
             }
         });
-
     }
 
     @SuppressWarnings("unchecked")
